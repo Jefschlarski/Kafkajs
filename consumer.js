@@ -1,23 +1,28 @@
 const { Kafka } = require('kafkajs');
 
 const kafka = new Kafka({
-  clientId: 'my-producer',
-  brokers: ['localhost:9092']  // Adicione os endereços dos brokers do seu cluster Kafka
+  clientId: 'jef',
+  brokers: ['localhost:9092']
 });
 
-const consumer = kafka.consumer({ groupId: 'my-group' });
+const consumer = kafka.consumer({ groupId: '123' });
 
-async function run() {
+const idDesejado = '1';
+
+const run = async () => {
   await consumer.connect();
-  await consumer.subscribe({ topic: 'teste', fromBeginning: true });
+  await consumer.subscribe({ topic: 'topicName', fromBeginning: false });
 
   await consumer.run({
     eachMessage: async ({ topic, partition, message }) => {
-      console.log({
-        value: message.value.toString(),
-      });
+        const header = message.headers['token'].toString()
+        console.log(header)
+      // const eventID = message.key.toString();
+      // if (eventID === idDesejado) {
+      //   console.log(`Evento com ID ${idDesejado} recebido: ${message.value.toString()}`);
+      // }
     },
   });
-}
+};
 
 run().catch(console.error);

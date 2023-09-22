@@ -4,5 +4,15 @@
     "kafkajs": "^2.2.4",
     "node-rdkafka": "^2.17.0",
     "npm-hook-receiver": "^1.0.0"
-  }
+  },
+  "name": "kafkajs",
+  "description": "============================",
+  "version": "1.0.0",
+  "main": "consumer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
